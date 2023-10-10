@@ -10,31 +10,44 @@ export class ShoppingCartService {
   private cartItems: ShoppingCart[] = [];
   private cartSubject = new BehaviorSubject<ShoppingCart[]>([]);
 
-  private apiUrl = 'https://localhost:7200/api/ShoppingCart'; // Replace with your API URL
+  private apiUrl = 'https://localhost:7253/api/shoppingcart'; // Replace with your API base URL
 
   constructor(private http: HttpClient) { }
 
   getItems() {
     return this.cartSubject.asObservable();
   }
+
   getShoppingCartItems(): Observable<ShoppingCart[]> {
-    return this.http.get<ShoppingCart[]>(`${this.apiUrl}/shopping-cart-items`);
-  }
-  addItem(item: ShoppingCart) {
-    this.cartItems.push(item);
-    this.cartSubject.next([...this.cartItems]);
+    return this.http.get<ShoppingCart[]>(`${this.apiUrl}/items`);
   }
 
-  removeItem(item: ShoppingCart) {
-    const index = this.cartItems.findIndex((i) => i.productId === item.productId);
-    if (index !== -1) {
-      this.cartItems.splice(index, 1);
-      this.cartSubject.next([...this.cartItems]);
-    }
+  addItem(item: ShoppingCart): Observable<ShoppingCart> {
+    return this.http.post<ShoppingCart>(`${this.apiUrl}/add`, item);
   }
 
-  clearCart() {
-    this.cartItems = [];
-    this.cartSubject.next([]);
+  createCartItem(cartItem: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, cartItem);
+  }
+
+  removeItem(item: ShoppingCart): Observable<any> {
+    const url = `${this.apiUrl}/remove/${item.productId}`; // Assuming 'id' is the unique identifier for items
+    return this.http.delete(url);
+  }
+
+  clearCart(): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/clear`);
+  }
+
+  updateCartItem(item: any): Observable<any> {
+    const url = `${this.apiUrl}/update/${item.id}`; // Assuming 'id' is the unique identifier for items
+    return this.http.put(url, item);
   }
 }
+
+
+
+
+
+
+

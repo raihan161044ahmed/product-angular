@@ -1,7 +1,12 @@
-<!-- Display shopping cart items -->
+<!-- shopping-cart.component.html -->
+
 <h1>Shopping Cart</h1>
 <div *ngFor="let item of cartItems">
     <h3>{{ item.Name }}</h3>
+    <p>Price: {{ item.price }}</p>
     <p>Quantity: {{ item.quantity }}</p>
-  </div>
+    <button (click)="increaseQuantity(item)">+</button>
+    <button (click)="decreaseQuantity(item)">-</button>
+</div>
+
   
