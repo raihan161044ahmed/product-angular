@@ -13,7 +13,24 @@
   label {
     font-weight: bold;
   }
-  
+  /* Style for the form control */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Style for the form control on focus */
+.form-control:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove the default outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle box shadow */
+}
+
   .btn-primary {
     background-color: #007bff;
     color: #fff;

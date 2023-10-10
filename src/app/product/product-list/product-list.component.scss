@@ -1,0 +1,76 @@
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.table th, .table td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #4d0be6;
+  text-transform: uppercase;
+}
+
+.table tr:nth-child(even) {
+  background-color: #acc6ec;
+}
+
+.table tr:hover {
+  background-color: #e0e0e0;
+}
+
+/* Button styles */
+.action-button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+/* Button icons (Font Awesome) */
+.action-button.edit::before {
+  content: '\f044'; /* Edit icon */
+  font-family: FontAwesome;
+  margin-right: 5px;
+}
+
+.action-button.delete::before {
+  content: '\f1f8'; /* Trash icon */
+  font-family: FontAwesome;
+  margin-right: 5px;
+}
+
+.action-button.details::before {
+  content: '\f05a'; /* Info icon */
+  font-family: FontAwesome;
+  margin-right: 5px;
+}
+
+.action-button.cart::before {
+  content: '\f07a'; /* Shopping Cart icon */
+  font-family: FontAwesome;
+  margin-right: 5px;
+}
+
+.cart-button{
+  margin-left: 90%;
+  padding: 15px;
+  background-color:yellow;
+  font-size: 20px;
+}

@@ -1,2 +1,30 @@
-<app-product-add></app-product-add>
-<p>product-list works!</p>
+<app-product-add (productAdded)="onProductAdded()"></app-product-add>
+<button class="cart-button" (click)="navigateToCartPage()">Cart</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Details</th>
+      <th>Cart</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.description }}</td>
+      <td><button class="action-button">Edit</button></td>
+      <td><button class="action-button">Delete</button></td>
+      <td><button class="action-button">Details</button></td>
+      <td><button class="action-button">Add to Cart</button></td>
+    </tr>
+  </tbody>
+</table>
+<!-- (click)="editProduct(product)"
+  (click)="deleteProduct(product)"
+  (click)="showDetails(product)"
+  (click)="addToCart(product)" -->

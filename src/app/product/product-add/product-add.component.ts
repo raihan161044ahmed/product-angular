@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Product } from '../product-model/product.model';
 import { ProductService } from '../product.service';
 
@@ -7,7 +7,9 @@ import { ProductService } from '../product.service';
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.scss']
 })
-export class ProductAddComponent {
+export class ProductAddComponent
+{
+  @Output() productAdded = new EventEmitter<void>();
   newProduct: Product = new Product(); // Initialize a new product object
 
   constructor(private productService: ProductService) { }
@@ -23,5 +25,12 @@ export class ProductAddComponent {
       // Handle any errors (e.g., show an error message)
       console.error('Error adding product:', error);
     });
+  }
+  onAddProduct ()
+  {
+    this.productService.addProduct( this.newProduct ).subscribe( () =>
+    {
+      this.productAdded.emit();
+    } );
   }
 }
