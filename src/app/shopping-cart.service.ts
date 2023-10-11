@@ -10,7 +10,7 @@ export class ShoppingCartService {
   private cartItems: ShoppingCart[] = [];
   private cartSubject = new BehaviorSubject<ShoppingCart[]>([]);
 
-  private apiUrl = 'https://localhost:7253/api/shoppingcart'; // Replace with your API base URL
+  private apiUrl = 'https://localhost:7200/api/shoppingcart'; // Replace with your API base URL
 
   constructor(private http: HttpClient) { }
 
@@ -39,15 +39,9 @@ export class ShoppingCartService {
     return this.http.delete(`${this.apiUrl}/clear`);
   }
 
-  updateCartItem(item: any): Observable<any> {
-    const url = `${this.apiUrl}/update/${item.id}`; // Assuming 'id' is the unique identifier for items
+  updateCartItem(item: ShoppingCart): Observable<any> {
+    const url = `${this.apiUrl}/update/${item.productId}`
     return this.http.put(url, item);
   }
+  
 }
-
-
-
-
-
-
-

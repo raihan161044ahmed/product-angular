@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product-model/product.model';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
+import { ShoppingCart } from '../product-model/shopping-cart.model';
 import { ShoppingCartService } from 'src/app/shopping-cart.service';
 
 @Component({
@@ -35,30 +36,21 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/cart']);
   }
 
-  addToCart(product: any) {
+  addToCart(product: Product) {
     // Check if the product is already in the cart
-    const existingCartItem = this.cartItems.find(item => item.productId === product.id);
+    const existingCartItem = this.cartItems.find((item) => item.id === product.id);
 
     if (existingCartItem) {
-      // If the product is already in the cart, increment its quantity
       existingCartItem.quantity++;
-      // Update the cart item on the server
+
       this.shoppingCartService.updateCartItem(existingCartItem).subscribe(() => {
         // Handle the update success if needed
       });
     } else {
       // If the product is not in the cart, add it as a new cart item
-      const newCartItem = {
-        productId: product.id,
-        productName: product.name,
-        quantity: 1 // Initial quantity is 1
-      };
-      // Add the new cart item to the cartItems array
-      this.cartItems.push(newCartItem);
+      this.cartItems.push({ ...product, quantity: 1 });
       // Create the cart item on the server
-      this.shoppingCartService.createCartItem(newCartItem).subscribe(() => {
-        // Handle the create success if needed
-      });
+      this.shoppingCartService.createCartItem(product).subscribe(() => {});
     }
   }
 }
